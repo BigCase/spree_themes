@@ -20,7 +20,11 @@ module Spree
       private
 
         def load_theme
-          @theme = Spree::Theme.find_by(id: params[:theme_id])
+	  unless :theme_id.nil?
+	    @theme = Spree::Theme.find_by(id: params[:theme_id])
+          else
+             @theme = Spree::Theme.first
+	  end
           unless @theme
             redirect_to admin_themes_path
           end
